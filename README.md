@@ -3,9 +3,7 @@
 
 A complete production-ready platform for real-time tracking of construction sites, vehicles, employees, and traffic with secure authentication and comprehensive analytics.
 
-**Live Demo Credentials:**
-- Email: `admin@darkinnovative.com`
-- Password: `password`
+
 
 ---
 
