@@ -30,6 +30,7 @@ backend/detections.db
 backend/detections.db-journal
 backend/uploads/
 backend/.env
+backend/.env.*
 backend/.venv
 
 # Frontend
