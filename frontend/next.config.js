@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    allowedDevOrigins: ['darkinnovative.com'],
+  },
   images: {
-    domains: ['localhost', 'yourdomain.com'],
+    domains: ['localhost', 'darkinnovative.com'],
     unoptimized: true,
   },
   env: {

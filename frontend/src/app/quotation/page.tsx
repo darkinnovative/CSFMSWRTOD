@@ -135,6 +135,12 @@ export default function Quotation() {
   const handleApproveQuotation = async (quotationId: number) => {
     try {
       const token = localStorage.getItem('token');
+      
+      if (!token || token.trim() === '') {
+        alert('Please log in to approve quotations');
+        return;
+      }
+      
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/quotations/${quotationId}/approve`, {
         method: 'POST',
         headers: {
@@ -162,6 +168,12 @@ export default function Quotation() {
   const handleRejectQuotation = async (quotationId: number) => {
     try {
       const token = localStorage.getItem('token');
+      
+      if (!token || token.trim() === '') {
+        alert('Please log in to reject quotations');
+        return;
+      }
+      
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/quotations/${quotationId}/reject`, {
         method: 'POST',
         headers: {
@@ -193,6 +205,12 @@ export default function Quotation() {
 
     try {
       const token = localStorage.getItem('token');
+      
+      if (!token || token.trim() === '') {
+        alert('Please log in to delete quotations');
+        return;
+      }
+      
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/quotations/${quotationId}`, {
         method: 'DELETE',
         headers: {

@@ -2,9 +2,9 @@
 
 import React from "react";
 import { Zap, Globe, Smartphone, TrendingUp, Wind } from "lucide-react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import SlideShow from "@/components/SlideShow";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import SlideShow from "../components/SlideShow";
 
 export default function Home() {
 
@@ -287,7 +287,7 @@ export default function Home() {
             </div>
 
             {/* Feature 2: Fast Performance */}
-            <div className="group relative bg-gradient-to-br from-slate-800/80 to-slate-900/90 rounded-2xl border-2 border-green-500/40 group-hover:border-green-500/80 shadow-xl hover:shadow-2xl hover:shadow-green-500/40 transition-all duration-500 group-hover:scale-105 transform flex flex-col items-center justify-center relative overflow-hidden p-6">
+            <div className="group relative bg-gradient-to-br from-slate-800/80 to-slate-900/90 rounded-2xl border-2 border-green-500/40 group-hover:border-green-500/80 shadow-xl hover:shadow-2xl hover:shadow-green-500/40 transition-all duration-500 group-hover:scale-105 transform flex flex-col items-center justify-center overflow-hidden p-6">
               <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
               <div className="relative z-10 flex flex-col items-center justify-center text-center gap-3">
                 <Zap className="text-green-400 group-hover:text-green-300 transition-colors duration-300" size={32} />

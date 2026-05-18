@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import BottomNavBar from "@/components/BottomNavBar";
+import BottomNavBar from "../components/BottomNavBar";
 
 export const metadata: Metadata = {
   title: "Dark Innovative - Construction & Fleet Management",

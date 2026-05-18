@@ -307,7 +307,7 @@ export function useEmployee(employeeId: number) {
 
 export function useAttendanceStats(companyId: number, startDate?: string, endDate?: string) {
   return useFetch<AttendanceStatsResponse>(
-    () => employeesAPI.getAttendanceStats(companyId, startDate, endDate),
+    () => employeesAPI.getAttendanceStats(companyId),
     [companyId, startDate, endDate]
   );
 }
@@ -323,8 +323,8 @@ export function useCreateEmployee() {
   const { execute, loading, error, success } = useAsyncOperation<EmployeeResponse>();
 
   const createEmployee = useCallback(
-    async (data: EmployeeCreate) => {
-      return await execute(() => employeesAPI.createEmployee(data).then(r => r.data));
+    async (siteId: number, data: EmployeeCreate) => {
+      return await execute(() => employeesAPI.createForSite(siteId, data).then(r => r.data));
     },
     [execute]
   );
@@ -337,7 +337,7 @@ export function useUpdateEmployee(employeeId: number) {
 
   const updateEmployee = useCallback(
     async (data: EmployeeUpdate) => {
-      return await execute(() => employeesAPI.updateEmployee(employeeId, data).then(r => r.data));
+      return await execute(() => employeesAPI.updateEmployee(employeeId, 1, data).then(r => r.data));
     },
     [execute, employeeId]
   );
@@ -350,7 +350,7 @@ export function useCheckInEmployee(employeeId: number) {
 
   const checkIn = useCallback(
     async (data: EmployeeCheckIn) => {
-      return await execute(() => employeesAPI.checkInEmployee(employeeId, data).then(r => r.data));
+      return await execute(() => employeesAPI.checkInEmployee(employeeId, 1, data).then(r => r.data));
     },
     [execute, employeeId]
   );
@@ -363,7 +363,7 @@ export function useCheckOutEmployee(employeeId: number) {
 
   const checkOut = useCallback(
     async (data: EmployeeCheckOut) => {
-      return await execute(() => employeesAPI.checkOutEmployee(employeeId, data).then(r => r.data));
+      return await execute(() => employeesAPI.checkOutEmployee(employeeId, 1, data).then(r => r.data));
     },
     [execute, employeeId]
   );
@@ -375,7 +375,7 @@ export function useDeleteEmployee(employeeId: number) {
   const { execute, loading, error, success } = useAsyncOperation<void>();
 
   const deleteEmployee = useCallback(async () => {
-    return await execute(() => employeesAPI.deleteEmployee(employeeId).then(r => r.data));
+    return await execute(() => employeesAPI.deleteEmployee(employeeId, 1).then(r => r.data));
   }, [execute, employeeId]);
 
   return { deleteEmployee, loading, error, success };
@@ -401,49 +401,23 @@ export function useCurrentSiteTraffic(siteId: number) {
 
 export function useSiteTrafficStats(siteId: number, startDate?: string, endDate?: string) {
   return useFetch<TrafficStatsResponse>(
-    () => trafficAPI.getSiteTrafficStats(siteId, startDate, endDate),
+    () => trafficAPI.getSiteTrafficStats(siteId),
     [siteId, startDate, endDate]
   );
 }
 
-export function useCreateGatePass() {
-  const { execute, loading, error, success } = useAsyncOperation<GatePassResponse>();
+// export function useRecordTrafficVehicle() {
+//   const { execute, loading, error, success } = useAsyncOperation<any>();
 
-  const createGatePass = useCallback(
-    async (data: GatePassCreate) => {
-      return await execute(() => trafficAPI.createGatePass(data).then(r => r.data));
-    },
-    [execute]
-  );
+//   const recordVehicle = useCallback(
+//     async (siteId: number, data: TrafficVehicleCreate) => {
+//       return await execute(() => trafficAPI.recordTrafficVehicle(siteId, data).then(r => r.data));
+//     },
+//     [execute]
+//   );
 
-  return { createGatePass, loading, error, success };
-}
-
-export function useUpdateGatePass(passId: number) {
-  const { execute, loading, error, success } = useAsyncOperation<GatePassResponse>();
-
-  const updateGatePass = useCallback(
-    async (data: GatePassUpdate) => {
-      return await execute(() => trafficAPI.updateGatePass(passId, data).then(r => r.data));
-    },
-    [execute, passId]
-  );
-
-  return { updateGatePass, loading, error, success };
-}
-
-export function useRecordTrafficVehicle() {
-  const { execute, loading, error, success } = useAsyncOperation<any>();
-
-  const recordVehicle = useCallback(
-    async (data: TrafficVehicleCreate) => {
-      return await execute(() => trafficAPI.recordTrafficVehicle(data).then(r => r.data));
-    },
-    [execute]
-  );
-
-  return { recordVehicle, loading, error, success };
-}
+//   return { recordVehicle, loading, error, success };
+// }
 
 // ============================================================================
 // QUOTATION HOOKS
@@ -451,7 +425,7 @@ export function useRecordTrafficVehicle() {
 
 export function useQuotations(companyId?: number, status?: string, skip = 0, limit = 100) {
   return useFetch<QuotationResponse[]>(
-    () => quotationsAPI.getQuotations(skip, limit, companyId, status),
+    () => quotationsAPI.getQuotations(skip, limit, status),
     [companyId, status, skip, limit]
   );
 }
@@ -465,7 +439,7 @@ export function useQuotation(quotationId: number) {
 
 export function useQuotationStats(companyId: number, startDate?: string, endDate?: string) {
   return useFetch<QuotationStatsResponse>(
-    () => quotationsAPI.getQuotationStats(companyId, startDate, endDate),
+    () => quotationsAPI.getQuotationStats(),
     [companyId, startDate, endDate]
   );
 }
@@ -538,7 +512,7 @@ export function useDeleteQuotation(quotationId: number) {
 
 export function useOrders(companyId?: number, status?: string, skip = 0, limit = 100) {
   return useFetch<OrderResponse[]>(
-    () => ordersAPI.getOrders(skip, limit, companyId, status),
+    () => ordersAPI.getOrders(skip, limit, status),
     [companyId, status, skip, limit]
   );
 }
@@ -552,7 +526,7 @@ export function useOrder(orderId: number) {
 
 export function useOrderStats(companyId: number, startDate?: string, endDate?: string) {
   return useFetch<OrderStatsResponse>(
-    () => ordersAPI.getOrderStats(companyId, startDate, endDate),
+    () => ordersAPI.getOrderStats(),
     [companyId, startDate, endDate]
   );
 }
